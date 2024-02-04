@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{title}}</h1>
+<ul>
+    {% for p in object_list %}
+    <li>
+        <h2>{{ p.title }}</h2>
+        <p>{{ p.text}}</p>
+        <p>{{ p.author}}</p>
+        <p><a href="{{ p.get_absolute_url }}">Читать пост</a></p>
+        {% if request.user == p.author %}
+        <p><a href="{% url 'update_post' p.slug %}">Обновить пост</a></p>
+        <p><a href="{% url 'delete_post' p.slug %}">Удалить пост</a></p>
+        {% endif%}
+        {% for tag in p.tags.all %}
+        <p style="color: {{ tag.color }}">{{ tag }}</p>
+        {% endfor %}
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ title }}</h1>
+
+<h3>Вы уверены, что хотите удалить комментарий?</h3>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <input type="submit" value="Удалить комментарий">
+        <a href="{% url 'home' %}">Отмена</a>
+    </div>
+</form>
+
+{% endblock %}
